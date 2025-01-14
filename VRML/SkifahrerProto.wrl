@@ -1,0 +1,141 @@
+#VRML V2.0 utf8
+PROTO Skifahrer [
+    field SFColor color 1 0 0  # Standardfarbe ist rot
+    field SFVec3f translation 0 0 0
+] {
+    Transform {
+        translation IS translation
+        children [
+            # Kopf des Skifahrers
+            Transform {
+                translation 0 4.6 -10
+                children [
+                    Shape {
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor 0.6 0.6 0.6
+                            }
+                        }
+                        geometry Sphere {
+                            radius 0.2
+                        }
+                    }
+
+                ]
+            }
+
+            # Körper des Skifahrers
+            Transform {
+                translation 0 4 -10
+                children [
+                    Shape {
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor IS color
+                            }
+                        }
+                        geometry Box {
+                            size 0.4 0.8 0.2
+                        }
+                    }
+                ]
+            }
+
+            # Linker Arm
+            Transform {
+                translation -0.3 4.2 -10
+                children [
+                    Shape {
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor IS color
+                            }
+                        }
+                        geometry Box {
+                            size 0.1 0.4 0.1
+                        }
+                    }
+                ]
+            }
+
+            # Rechter Arm
+            Transform {
+                translation 0.3 4.2 -10
+                children [
+                    Shape {
+                        appearance Appearance {
+                            material Material {
+                                diffuseColor IS color
+                            }
+                        }
+                        geometry Box {
+                            size 0.1 0.4 0.1
+                        }
+                    }
+                ]
+            }
+    DEF LeftLeg Transform {
+                    translation -0.2 3.4 -10
+                    children [
+                        Shape {
+                            appearance Appearance {
+                                material Material {
+                                    diffuseColor IS bodyColor  # Red suit
+                                }
+                            }
+                            geometry IndexedFaceSet {
+                                coord Coordinate {
+                                    point [
+                                        -0.05 0 0,  0.05 0 0,  0.05 0.5 0,  -0.05 0.5 0,  # Front face
+                                        -0.05 0 0.1,  0.05 0 0.1,  0.05 0.5 0.1,  -0.05 0.5 0.1  # Back face
+                                    ]
+                                }
+                                coordIndex [
+                                    0 1 2 3 -1,  # Front face
+                                    4 5 6 7 -1,  # Back face
+                                    0 4 7 3 -1,  # Left face
+                                    1 5 6 2 -1,  # Right face
+                                    3 2 6 7 -1,  # Top face
+                                    0 1 5 4 -1   # Bottom face
+                                ]
+                                solid FALSE
+                            }
+                        }
+                    ]
+                }
+
+                # Right Leg
+                DEF RightLeg Transform {
+                    translation 0.4 0 0
+                    children [
+                        USE LeftLeg
+                    ]
+                }
+                           # Skis
+                DEF Skis Transform {
+                    translation -0.2 3.4 -10
+                    children [
+                        Shape {
+                            appearance Appearance {
+                                material Material {
+                                    diffuseColor 0 0.4 1  # Blue skis
+                                }
+                            }
+                            geometry Box {
+                                size 0.12 0.02 1.0  # Longer skis
+                            }
+                        }
+                    ]
+                }
+
+                # Duplicate Skis
+                Transform {
+                    translation 0.4 0 0
+                    children [
+                        USE Skis
+                    ]
+                }
+            
+        ]
+    }
+}

@@ -1,0 +1,794 @@
+#VRML V2.0 utf8
+
+# Importiere den Skifahrer-Prototyp
+EXTERNPROTO Skifahrer [
+field SFColor color
+field SFVec3f translation
+ ] "SkifahrerProto.wrl"
+
+#-----------------------------------------------------
+# Definiere den Berghang
+#-----------------------------------------------------
+
+# Geneigte Grundfläche des Hangs (Box)
+DEF Slope Transform {
+    translation 0 -2.5 0  # Positionierung der Grundfläche
+    rotation 1 0 0 0.3    # Neigung des Hangs (Rotation um die X-Achse)
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  # Weiß für den Schnee
+                }
+            }
+            geometry Box {
+                size 30 5 40  # Größe der Grundfläche
+            }
+        }
+    ]
+}
+# Auslauf des Hangs (gerade Fläche, Box)
+DEF Run Transform {
+    translation 0 -6 20  # Positionierung des Auslaufs
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  # Weiß für den Schnee
+                }
+            }
+            geometry Box {
+                size 30 6 30  # Größe des Auslaufs
+            }
+        }
+    ]
+}
+
+
+#-----------------------------------------------------
+#Baum:
+#-----------------------------------------------------
+# Definiere den Baumstamm (Zylinder)
+#DEF Tree_Stamm Transform {
+ #   translation -6 1 0  # Position des Baumstamms
+  #  children [
+   #     Shape {
+ #        appearance Appearance {
+ #               material Material {
+  #                  diffuseColor 0.6 0.3 0.1  # Braune Farbe für den Stamm
+   #             }
+    #        }
+     #       geometry Cylinder {
+      #          height 2.5  # Höhe des Baumstamms
+       #         radius 0.2  # Radius des Baumstamms
+        #    }
+        #}
+ #}
+
+# Definiere die Baumkrone (Kegel)
+#DEF Tree_Krone Transform {
+    #translation -6 3 0  # Position der Baumkrone
+    #children [
+        #Shape {
+         #   appearance Appearance {
+          #      material Material {
+           #         diffuseColor 0 1 0  # Grüne Farbe für die Blätter
+            #    }
+            #}
+            #geometry Cone {
+            #    height 2  # Höhe der Baumkrone
+            #    bottomRadius 1  # Radius der Basis der Baumkrone
+            #}
+        #}
+    #]
+#}
+
+# Definiere den gesamten Baum (Stamm und Krone zusammen)
+#DEF Tree Transform {
+ #   children [
+  #      USE Tree_Stamm,
+   #     USE Tree_Krone
+    #]
+#}
+
+
+
+
+
+
+#-----------------------------------------------------
+#Baum mit Textur:
+#-----------------------------------------------------
+# Definiere den Baumstamm (Zylinder) mit Textur
+DEF Tree_Stamm Transform {
+    translation -6 1 0  # Position des Baumstamms
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0.6 0.3 0.1  # Braune Farbe für den Stamm
+                }
+                texture ImageTexture {
+                    url "holz.jpeg"  # Ersetze mit der tatsächlichen Textur-Datei
+                }
+            }
+            geometry Cylinder {
+                height 2.5  # Höhe des Baumstamms
+                radius 0.2  # Radius des Baumstamms
+            }
+        }
+    ]
+}
+
+# Definiere die Baumkrone (Kegel) mit Textur
+DEF Tree_Krone Transform {
+    translation -6 3 0  # Position der Baumkrone
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0 1 0  # Grüne Farbe für die Blätter
+                }
+                texture ImageTexture {
+                    url "korne.jpeg"  # Ersetze mit der tatsächlichen Textur-Datei
+                }
+            }
+            geometry Cone {
+                height 2  # Höhe der Baumkrone
+                bottomRadius 1  # Radius der Basis der Baumkrone
+            }
+        }
+    ]
+}
+DEF Tree Transform {
+    children [
+        USE Tree_Stamm,
+        USE Tree_Krone
+    ]
+}
+
+
+# Platzierung des Hangs und der Bäume
+Transform {
+    translation 0 0 0  # Position des gesamten Hangs
+
+    children [
+        USE Slope,
+        USE Run,
+        Skifahrer { },  # Hier wird der externe Skifahrer eingefügt
+
+        # Baum 4
+        Transform {
+            translation 19 -2 5  # Position des ersten Baums
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 5
+        Transform {
+            translation -1 -3.5 10  # Position des zweiten Baums
+            rotation 0 0 0 0.3
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 6
+        Transform {
+            translation -4 -3.5 12  # Position des dritten Baums
+            rotation 0 0 0 0.3
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 7
+        Transform {
+            translation 14 -2 15  # Position des vierten Baums
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 11
+        Transform {
+            translation 13 -2 24  # Position des fünften Baums
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 10
+        Transform {
+            translation 8 -3 24  # Position des sechsten Baums
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 9
+        Transform {
+            translation -4 -3.5 22  # Position des siebten Baums
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 8
+        Transform {
+            translation 0 -3 19  # Position des achten Baums
+            rotation 0 0 0 0.3
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 3
+        Transform {
+            translation 8 -2 6  # Position des neunten Baums
+            rotation 0 0 0 0.3
+            children [
+                USE Tree
+            ]
+        },
+        # Baum 2
+        Transform {
+            translation 4 -2 5  # Position des zehnten Baums
+            rotation 0 0 0 0.3
+            children [
+                USE Tree
+            ]
+        }
+    ]
+}
+
+
+
+#-----------------------------------------------------
+#Fläche für Berghütte:
+#-----------------------------------------------------
+# Auslauf des Hangs (gerade Fläche, Box)
+DEF Run Transform {
+    translation 10 -3 15  # Positionierung des Auslaufs
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  # Weiß für den Schnee
+                }
+            }
+            geometry Box {
+                size 10 3 30  # Größe des Auslaufs
+            }
+        }
+    ]
+}
+DEF Run Transform {
+    translation 2 -3.3 15  # Positionierung des Auslaufs
+    rotation 0 0 1 0.3
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  # Weiß für den Schnee
+                }
+            }
+            geometry Box {
+                size 7 1.5 30  # Größe des Auslaufs
+            }
+        }
+    ]
+}
+
+
+#-----------------------------------------------------
+#Berghütte:
+#-----------------------------------------------------
+#DEF Hut Transform {
+ #     translation 8 -1.5 8 
+ #     scale 1.7 1.7 1.7 
+ #    children [
+ #        # Basis der Hütte
+ #        Transform {
+ #            translation 0 0.5 0
+ #            children [
+ #                Shape {
+ #                    appearance Appearance {
+ #                        material Material {
+ #                            diffuseColor 0.2 0.5 0.5  # Braune Farbe für die Hütte
+ #                         } 
+ #                   }
+ #                   geometry Box {
+ #                        size 2 1 1  # Breite, Höhe, Tiefe
+ #                    }
+ #                }
+ #            ]
+#}
+
+#Dach der Hütte
+#Transform {
+ #           translation 0 1.5 0  # Position über der Basis
+ #            children [
+ #                Shape {
+ #                    appearance Appearance {
+ #                        material Material {
+ #                            diffuseColor 0.8 0.3 0  # Rotes Dach
+ #                        }
+ #                    }
+ #                    geometry IndexedFaceSet {
+ #                        coord Coordinate {
+ #                            point [
+ #                                -1 -0.5 -0.5,  1 -0.5 -0.5,  1 -0.5 0.5,  -1 -0.5 0.5,  # Basis des Dachs
+ #                                0 0.5 0  # Dachspitze
+ #                            ]
+ #                        }
+ #                         coordIndex [
+ #                            0 1 4 -1,  # Vorderseite
+ #                            1 2 4 -1,  # Rechte Seite
+ #                            2 3 4 -1,  # Rückseite
+ #                            3 0 4 -1,  # Linke Seite
+ #                            0 1 2 3 -1  # Unterseite (für vollständige Geometrie)
+ #                        ]
+ #                        solid FALSE
+ #                    }
+ #                }
+ #            ]
+#}
+
+#Schornstein
+#Transform {
+ #            translation -0.8 1.4 -0.1  # Position auf dem Dach
+ #            children [
+ #                Shape {
+ #                    appearance Appearance {
+ #                        material Material {
+ #                            diffuseColor 0.3 0.3 0.3  # Grauer Schornstein
+ #                        }
+ #                    }
+ #                    geometry Box {
+ #                       size 0.2 0.6 0.2  # Schornsteingröße
+ #                    }
+ #                }
+ #            ]
+ #        }
+ #    ]
+#}
+
+
+#-----------------------------------------------------
+#Berghütte mit Textur:
+#-----------------------------------------------------
+# Definiere die Berghütte (Box)
+DEF Hut Transform {
+    translation 8 -1.5 8 
+    scale 1.7 1.7 1.7 
+    children [
+        # Basis der Hütte mit Holztextur
+        Transform {
+            translation 0 0.5 0
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 0.8 0.8 0.8  # Helle Grundfarbe, falls Textur nicht geladen wird
+                        }
+                        texture ImageTexture {
+                            url "haus.webp"  # Holztextur-Datei
+                        }
+                    }
+                    geometry Box {
+                        size 2 1 1  # Breite, Höhe, Tiefe
+                    }
+                }
+            ]
+        }
+
+        # Dach der Hütte (optional mit Textur)
+        Transform {
+            translation 0 1.5 0  # Position über der Basis
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 0.8 0.3 0  # Rote Grundfarbe für das Dach
+                        }
+                        texture ImageTexture {
+                            url "dach.webp"  # Optional: Dachtextur
+                        }
+                    }
+                    geometry IndexedFaceSet {
+                        coord Coordinate {
+                            point [
+                                -1 -0.5 -0.5,  1 -0.5 -0.5,  1 -0.5 0.5,  -1 -0.5 0.5,  # Basis des Dachs
+                                0 0.5 0  # Dachspitze
+                            ]
+                        }
+                        coordIndex [
+                            0 1 4 -1,  # Vorderseite
+                            1 2 4 -1,  # Rechte Seite
+                            2 3 4 -1,  # Rückseite
+                            3 0 4 -1,  # Linke Seite
+                            0 1 2 3 -1  # Unterseite (für vollständige Geometrie)
+                        ]
+                        solid FALSE
+                    }
+                }
+            ]
+        }
+
+        # Schornstein
+        Transform {
+            translation -0.8 1.4 -0.1  # Position auf dem Dach
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 0.3 0.3 0.3  # Grauer Schornstein
+                        }
+                    }
+                    geometry Box {
+                        size 0.2 0.6 0.2  # Schornsteingröße
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+#-----------------------------------------------------
+#Drei Skifahrer mit unterschiedlichen Farben
+#-----------------------------------------------------
+# Roter Skifahrer mit TouchSensor und Animation
+
+ DEF rot  Skifahrer {
+  } 
+
+        
+ DEF grun  Skifahrer {
+            translation 2 0 0
+             color 0 1 0   # Grün 
+} 
+
+DEF blau Skifahrer {
+            translation -2 0 0
+            color 0 0 1  # Blau
+}
+
+DEF blauu Skifahrer {
+            translation -4 0 0
+             color 0 2 1  # Blau
+}
+
+
+
+
+
+#-----------------------------------------------------
+#View
+#-----------------------------------------------------
+#4.a Viewpoint für die Vogelperspektive
+Viewpoint {
+    position 0 50 0   # Hoch über dem Zentrum des Hangs
+    orientation 1 0 0 -1.57 # Die Kamera neigt nach unten (90 Grad in Bogenmaß ist ~-1.57)
+    description "Vogelperspektive"
+    fieldOfView 0.785  # Ein etwas weiteres Sichtfeld
+}
+#4.b Seitliche Ansicht vom Hang Links
+Viewpoint {
+    position -30 0 0  # Auf der linken Seite des Hangs
+    orientation 0 1 0 -1.57  # 90 Grad Drehung zur rechten Seite, auf den Hang blickend
+    description "Seitliche Ansicht vom Hang Links"
+    fieldOfView 0.785
+}
+# Seitliche Ansicht vom Hang Rechts
+Viewpoint {
+    position 30 0 0  # Auf der rechten Seite des Hangs
+    orientation 0 1 0 1.57  # 90 Grad Drehung, um zum Hang zu blicken
+    description "Seitliche Ansicht vom Hang Rechts"
+    fieldOfView 0.785
+}
+#  Ansicht von Vorne
+Viewpoint {
+    position 0 2 45  # In der Nähe von Bäumen
+    orientation 0 1 0 0  # Blick auf den Wald
+    description "Dichte Waldansicht"
+    fieldOfView 0.785
+}
+
+# Ansicht von hinten
+Viewpoint {
+    position 0 12 -30  # Direkt hinter dem Kopf des Skifahrers
+    orientation 0 1 0 3.14159  # Blick in die Z-Richtung (also ins Negativ, da im Minus)
+    description "Ansicht von hinter dem Skifahrer"
+    fieldOfView 0.785  # Weites Sichtfeld für eine vollständigere Perspektive
+}
+
+
+#-----------------------------------------------
+#Licht
+#-----------------------------------------------
+DEF Hut Transform {
+    children [
+        # Scheinwerfer
+        DEF MySpotLight SpotLight {
+            location 8 0 8.5  # Position des Scheinwerfers
+            direction 0 0 -1  # Licht nach unten
+            color 0 1 0  # Grünes Licht
+            intensity 2  # Standard-Intensität (Licht an)
+            cutOffAngle 1.5  # Strahlwinkel
+            beamWidth 0  # Breite des Kernstrahls
+        }
+
+        # Sichtbare Kugel zur Darstellung der Lichtquelle
+        Transform {
+            translation 8 0 7  # Gleiche Position wie der Scheinwerfer
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 1 1 0  # Gelb
+                            emissiveColor 1 1 0  # Leuchtend
+                        }
+                    }
+                    geometry Sphere { radius 0.3 }   # Kugel als visuelle Markierung
+                }
+            ]
+        },
+
+        # Schalter-Kugel
+        Transform {
+            translation 6 0.5 8.5  # Position des Schalters
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                            diffuseColor 0 0 1  # Blau
+                        }
+                    }
+                    geometry Sphere { radius 0.3 }  # Schalter-Kugel
+                }
+                DEF SwitchSensor TouchSensor { }
+            ]
+        }
+    ]
+}
+
+# Skript zum Umschalten des Lichts
+DEF LightToggleScript Script {
+    field SFBool isOn TRUE  # Initialzustand (Licht an)
+    eventIn SFBool toggle  # Eingangssignal
+    eventOut SFFloat intensityChanged  # Ausgangssignal für Intensität
+
+    url "javascript:
+        function toggle(isActive) {
+            if (isActive) {  // Nur auf positive Zustandsänderung reagieren
+                isOn = !isOn;  // Zustand umschalten
+                intensityChanged = isOn ? 2.0 : 0.0;  // Licht ein/aus
+            }
+        }
+    "
+}
+
+# Routen zur Verbindung
+ROUTE SwitchSensor.isActive TO LightToggleScript.toggle
+ROUTE LightToggleScript.intensityChanged TO MySpotLight.intensity
+
+
+
+#-------------------------------------------------------------
+#Background
+#------------------------------------------------------------
+Background {
+    backUrl "bild1.jpg"   # Texture for the back side
+    frontUrl "bild1.jpg"  # Texture for the front side
+    leftUrl "bild1.jpg"        # Texture for the left side
+    rightUrl "bild1.jpg"    # Texture for the right side
+    topUrl "bild2.jpg"       # Texture for the top (sky)
+    bottomUrl  "bild1.jpg"   
+}
+
+
+
+#-------------------------------------------------------------
+#Animation
+#------------------------------------------------------------
+# Skifahrer Transform-Knoten in der Startposition
+
+# TimeSensor für die Animation
+DEF SkierTimer TimeSensor {
+    cycleInterval 30   # 30 Sekunden pro Durchlauf
+    loop FALSE         # Animation wird nicht automatisch wiederholt
+}
+
+# Positionsinterpolator
+DEF SkierPosition PositionInterpolator {
+    key [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    keyValue [
+        0 0 0,      # Startposition
+        3 -1.2 2,
+        0 -1.9 5,
+        -3 -3.5 10,
+        0 -4.5 15,
+        3 -6.1 20,
+        0 -6.1 25,
+        0 -6.1 25,
+        0 0 -20       # Zurück zur Startposition
+    ]
+}
+
+# Orientierungsinterpolator
+DEF SkierRotation OrientationInterpolator {
+    key [0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 1]
+    keyValue [
+        0 1 0 0,        # Startorientierung (geradeaus)
+        0 1 0 0.785,    # Drehung (45° nach rechts)
+        0 1 0 0,        # Geradeaus
+        0 1 0 -0.785,   # Drehung (45° nach links)
+        0 1 0 0,        # Geradeaus
+        0 1 0 3.14159,  # Drehung um 180° vor Rückfahrt
+        0 1 0 3.14159,  # Beibehaltung
+    ]
+}
+
+
+
+
+DEF rotSkifahrer Transform {
+    translation 0 0 0  # Position des roten Skifahrers
+    children [
+        # Definiere den TouchSensor für den roten Skifahrer
+        DEF SkierTouchSensor TouchSensor {
+            enabled TRUE  # Aktivieren des Sensors
+            description "Skier Touch Area"  # Beschreibung des Sensors
+        }
+        
+        # Skifahrer selbst, der bereits definiert ist (z.B. aus einer Proto-Datei)
+        USE rot  # Verwendet den bereits definierten "rot" Skifahrer
+    ]
+}
+
+
+# Verbindungen für die Animation und Interaktionen
+ROUTE SkierTouchSensor.touchTime TO SkierTimer.set_startTime
+ROUTE SkierTimer.fraction_changed TO SkierPosition.set_fraction
+ROUTE SkierTimer.fraction_changed TO SkierRotation.set_fraction
+ROUTE SkierPosition.value_changed TO rotSkifahrer.set_translation  # Verschiebe den ganzen Transform
+ROUTE SkierRotation.value_changed TO rotSkifahrer.set_rotation 
+
+
+
+
+#-------------------------------------------------------------
+#Texturierung: oben 
+#-------------------------------------------------------------
+
+#-------------------------------------------------------------
+# 3D Sound hinzufügen
+#-------------------------------------------------------------
+Sound {
+   location -12 5 5  # Position des Sounds
+    maxBack 20      # Hörreichweite nach hinten
+    maxFront 20     # Hörreichweite nach vorne
+    minBack 5       # Minimaler Abstand
+    minFront 5      # Minimaler Abstand
+    source AudioClip {
+        url "sound.mp3"  # Sounddatei für den Skilift
+        loop TRUE             # Loop für kontinuierlichen Sound
+    }
+}
+
+
+
+#-------------------------------------------------------------
+#Luftseilbahn
+#-------------------------------------------------------------
+
+DEF base2 Transform {
+    translation 13 5 -13.5
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0.5 0.5 0.5 
+                }
+            }
+            geometry Cylinder {
+                height 1.5  
+                radius 0.2  
+            }
+        }
+    ]
+}
+DEF zimmer2 Transform {
+    translation 13 5 -13.5  
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  
+                }
+            }
+            geometry Box {
+                size 1 0.85 0.85  
+            }
+        }
+    ]
+}
+
+DEF base2 Transform {
+    translation 13 2 24
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0.5 0.5 0.5  
+                }
+            }
+            geometry Cylinder {
+                height 7.5  
+                radius 0.2  
+            }
+        }
+    ]
+}
+DEF Zimmer2 Transform {
+    translation 13 5 24  
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1  
+                }
+            }
+            geometry Box {
+                size 1 0.85 0.85  
+            }
+        }
+    ]
+}
+
+
+DEF Kabel Transform {
+    translation 13 5.5 5.2
+    rotation 1 0 0 1.5708  
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0.5 0.5 0.5  
+                }
+            }
+            geometry Cylinder {
+                height 37.5  
+                radius 0.1 
+            }
+        }
+    ]
+}
+# Skilift-Gondel auf einer B-Spline-Kurve
+DEF LiftGondel Transform {
+    translation 0 0 0  # Startposition der Gondel
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 0.6 0.4 0.2  # Blaue Gondel
+                }
+            }
+            geometry Box {
+                size 1 0.8 0.8  # Größe der Gondel
+            }
+        }
+    ]
+}
+
+# B-Spline-Kurve für die Gondelbahn
+DEF LiftPath PositionInterpolator {
+    key [0, 0.5,  1]
+    keyValue [
+        13 5 -13,  13 5 24 ,  13 5 -13
+    ]
+}
+
+# Zeitgeber für die Bewegung
+DEF LiftTimer TimeSensor {
+    cycleInterval 20  # 20 Sekunden pro Durchlauf
+    loop TRUE          # Endlos-Schleife
+}
+
+# Verbindungens
+ROUTE LiftTimer.fraction_changed TO LiftPath.set_fraction
+ROUTE LiftPath.value_changed TO LiftGondel.set_translation
